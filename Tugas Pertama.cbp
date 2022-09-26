@@ -1,40 +1,115 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
-	<Project>
-		<Option title="Tugas Pertama" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
-		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/Tugas Pertama" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
-			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/Tugas Pertama" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-O2" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="-fexceptions" />
-		</Compiler>
-		<Unit filename="main.cpp" />
-		<Extensions>
-			<lib_finder disable_auto="1" />
-		</Extensions>
-	</Project>
-</CodeBlocks_project_file>
+#include <iostream>
+#include<conio.h>
+using namespace std;
+struct paket
+{
+    char jenis_brg [30];
+    int berat,harga,totalHarga;
+    char kota[30];
+
+};
+struct paket kirim[100];
+
+void tambahdata(int x)
+    {
+        cout << "Inputkan Jenis Barang : ";
+        cin >> kirim[x].jenis_brg;
+        cout << "Inputkan Berat Barang : ";
+        cin >> kirim[x].berat;
+        cout << "Inputkan Kota Tujuan : ";
+        cin >> kirim[x].kota;
+        cout << "Inputkan Harga         : ";
+        cin >> kirim[x].harga;
+    }
+void tampildata(int x)
+    {
+        cout << "Daftar Barang" << endl;
+        for(int a=1; a<x; a++)
+        {
+            cout << a << " ";
+            cout << kirim[a].jenis_brg << " ";
+            cout << kirim[a].berat << "Kg ";
+            cout << "Rp"<< kirim[a].harga << " ";
+            cout << kirim[a].kota << endl;
+        }
+        cout <<"Press Any Key...";
+        getch();
+        cout << endl;
+    }
+int hapusdata(int x)
+{
+    cout << "Data terakhir yang anda hapus : ";
+    cout << kirim[x-1].jenis_brg << " ";
+    cout << kirim[x-1].berat << "Kg ";
+    cout << "Rp "<< kirim[x-1].harga << " ";
+    cout << kirim[x-1].kota << endl;
+    x-=1;
+    return x;
+}
+
+void totalHarga(int x)
+{
+    int p=0;
+    for(int i=0;i<x;i++)
+        {p=p+kirim[i].harga;}
+    cout << "Total harga semuanya adalah " << p << "Rp" << endl;;
+}
+
+void totalberat(int x)
+{
+    int q=0;
+    for(int i=0;i<x;i++)
+        {q=q+kirim[i].berat;}
+    cout << "Total Berat semuanya adalah " << q << "kg"<<  endl;;
+}
+
+int main()
+{
+    int pilih;
+    int datake=1;
+    do
+    {
+        cout << endl;
+        cout << "***Paket****" << endl;
+        cout << "1. Tambah data" << endl;
+        cout << "2. Hapus Data Terakhir" << endl;
+        cout << "3. Tampil data" << endl;
+        cout << "4. Kosongkan Data" << endl;
+        cout << "5. Total Harga" << endl;
+        cout << "6. Total Berat" << endl;
+        cout << "9. Keluar " << endl;
+
+        cout << "Pilihan anda (1-9) : ";
+        cin >> pilih;
+        cout << endl;
+        cout << endl;
+        if (pilih == 1)
+        {
+            tambahdata(datake);
+            datake++;
+        }
+        if (pilih == 2)
+        {
+            datake = hapusdata(datake);
+        }
+        if (pilih == 3 )
+        {
+            tampildata(datake);
+        }
+        if (pilih == 4 )
+        {
+            cout << "Data Sukses dihapus " << endl;
+            datake = 1 + (datake-datake);
+        }
+        if (pilih == 5 )
+        {
+            totalHarga(datake);
+        }
+        if (pilih == 6 )
+        {
+            totalberat(datake);
+        }
+    }
+    while (pilih!=9);
+    return 0;
+}
